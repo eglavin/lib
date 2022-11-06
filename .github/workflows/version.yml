@@ -47,3 +47,5 @@ jobs:
           git config user.email "<>"
 
       - run: pnpm release
+
+      - run: git push --follow-tags origin main
