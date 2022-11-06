@@ -56,6 +56,7 @@ module.exports = {
     "no-empty-function": 1,
     "no-unused-vars": 0,
     "prettier/prettier": [1, { endOfLine: "auto" }],
+    "react/display-name": 0,
     "react/jsx-uses-react": 0,
     "react/react-in-jsx-scope": 0,
   },

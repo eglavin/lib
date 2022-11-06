@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 export type ButtonProps = {
   label: string;
@@ -10,6 +10,13 @@ export type ButtonProps = {
   "children"
 >;
 
-export const Button = ({ label, ...props }: ButtonProps): JSX.Element => {
-  return <button {...props}>{label}</button>;
-};
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { label, ...props },
+  ref
+) {
+  return (
+    <button {...props} ref={ref}>
+      {label}
+    </button>
+  );
+});
