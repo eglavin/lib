@@ -11,7 +11,8 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rimraf ./dist & rollup -c --bundleConfigAsCjs"
+    "build": "rimraf ./dist & rollup -c --bundleConfigAsCjs",
+    "release": "standard-version"
   },
   "peerDependencies": {
     "react": ">=16.8"
@@ -37,6 +38,7 @@
     "rimraf": "^3.0.2",
     "rollup": "3.2.5",
     "rollup-plugin-dts": "5.0.0",
+    "standard-version": "^9.5.0",
     "tslib": "2.4.1",
     "typescript": "4.8.4"
   }

@@ -1,0 +1,27 @@
+name: Version Library
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js lts/*
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+          cache: "pnpm"
+
+      - run: pnpm i --frozen-lockfile
+
+      - name: Configure committer
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - run: pnpm release
