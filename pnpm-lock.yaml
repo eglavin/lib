@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@rollup/plugin-commonjs': 23.0.2
+  '@rollup/plugin-eslint': ^9.0.1
   '@rollup/plugin-node-resolve': 15.0.1
   '@rollup/plugin-typescript': 8.3.3
   '@types/eslint': 8.4.10
@@ -29,6 +30,7 @@ specifiers:
 
 devDependencies:
   '@rollup/plugin-commonjs': 23.0.2_rollup@3.2.5
+  '@rollup/plugin-eslint': 9.0.1_rollup@3.2.5
   '@rollup/plugin-node-resolve': 15.0.1_rollup@3.2.5
   '@rollup/plugin-typescript': 8.3.3_skqhbvp355vci76ty3pdffvjrq
   '@types/eslint': 8.4.10
@@ -209,6 +211,22 @@ packages:
       is-reference: 1.2.1
       magic-string: 0.26.7
       rollup: 3.2.5
+    dev: true
+
+  /@rollup/plugin-eslint/9.0.1_rollup@3.2.5:
+    resolution: {integrity: sha512-6arHaZt+0pH8dgsxqT4KLW7BvJ0NThJRJtf56A7HKgBynLfcWJwiUvdb+TMowQdZgxRIvTnBV1VIER/FBrDFDw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.2_rollup@3.2.5
+      eslint: 8.26.0
+      rollup: 3.2.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@rollup/plugin-node-resolve/15.0.1_rollup@3.2.5:
