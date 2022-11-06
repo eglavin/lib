@@ -1,3 +1,4 @@
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
@@ -20,11 +21,27 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [resolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" })],
+    plugins: [
+      peerDepsExternal(),
+      resolve({
+        browser: true,
+      }),
+      commonjs(),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        declaration: false,
+        declarationDir: null,
+      }),
+    ],
   },
   {
-    input: "dist/esm/types/index.d.ts",
-    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    input: "src/index.ts",
+    output: [
+      {
+        file: "dist/index.d.ts",
+        format: "esm",
+      },
+    ],
     plugins: [dts.default()],
   },
 ];
