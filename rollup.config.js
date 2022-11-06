@@ -1,3 +1,4 @@
+import eslint from "@rollup/plugin-eslint";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -23,6 +24,9 @@ export default [
       },
     ],
     plugins: [
+      eslint({
+        throwOnError: true,
+      }),
       peerDepsExternal(),
       resolve({
         browser: true,
