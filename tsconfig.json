@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
     "declaration": true,
     "declarationDir": "types",
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "jsx": "react",
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "node",
+    "noImplicitAny": true,
     "outDir": "dist",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "es5",
     "types": ["react"]
   },

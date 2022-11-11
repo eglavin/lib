@@ -1,3 +1,4 @@
+import includePaths from "rollup-plugin-includepaths";
 import eslint from "@rollup/plugin-eslint";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
@@ -26,6 +27,12 @@ export default [
     plugins: [
       eslint({
         throwOnError: true,
+      }),
+      includePaths({
+        include: {},
+        paths: ["src"],
+        external: [],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
       }),
       peerDepsExternal(),
       resolve({

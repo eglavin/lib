@@ -24,6 +24,11 @@ module.exports = {
       pragma: "React",
       version: "detect",
     },
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+      },
+    },
   },
 
   ignorePatterns: ["/dist", "/node_modules", "*.test.*.snap"],
