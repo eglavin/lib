@@ -87,5 +87,11 @@ module.exports = {
         "no-unused-vars": [1, { ignoreRestSiblings: true, argsIgnorePattern: "^_" }],
       },
     },
+    {
+      files: ["**/*.stories.*"],
+      rules: {
+        "import/no-anonymous-default-export": 0,
+      },
+    },
   ],
 };
