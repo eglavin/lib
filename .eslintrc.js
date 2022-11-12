@@ -24,6 +24,7 @@ module.exports = {
       pragma: "React",
       version: "detect",
     },
+    "import/ignore": ["node_modules", /\.json$/, /\.css$/],
     "import/resolver": {
       node: {
         paths: ["src"],
@@ -31,7 +32,7 @@ module.exports = {
     },
   },
 
-  ignorePatterns: ["/dist", "/node_modules", "*.test.*.snap"],
+  ignorePatterns: ["/dist", "/node_modules", "*.test.*.snap", "*.css"],
 
   plugins: ["react", "jsx-a11y", "prettier", "@typescript-eslint"],
   extends: [

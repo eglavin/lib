@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import "./Button.css";
 
 export type ButtonProps = {
   label: string;
