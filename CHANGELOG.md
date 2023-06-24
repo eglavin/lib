@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.12 (2023-06-24)
+
+
+### Bug Fixes
+
+* move global regex inside function scope ([207eddd](https://github.com/eglavin/lib/commit/207eddd9bc0336008682498502c0cb6e79980657))
+
 ### 1.0.11 (2022-11-12)
 
 ### 1.0.10 (2022-11-12)
