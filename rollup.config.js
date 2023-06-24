@@ -1,30 +1,42 @@
 import path from "path";
 
-import includePaths from "rollup-plugin-includepaths";
+import { babel } from "@rollup/plugin-babel";
+import { defineConfig } from "rollup";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
+import commonjs from "@rollup/plugin-commonjs";
+import dts from "rollup-plugin-dts";
 import eslint from "@rollup/plugin-eslint";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import { babel } from "@rollup/plugin-babel";
 import postcss from "rollup-plugin-postcss";
-import { terser } from "rollup-plugin-terser";
-import dts from "rollup-plugin-dts";
 
 import packageJson from "./package.json";
 
-export default [
+const rootDirectory = path.resolve(__dirname);
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
+
+const esmLocation = packageJson.exports["."].import;
+const cjsLocation = packageJson.exports["."].require;
+const dtsLocation = packageJson.exports["."].types;
+
+export default defineConfig([
   {
     input: "src/index.ts",
     output: [
       {
-        dir: path.resolve(path.parse(packageJson.main).dir, ".."), // Step up a level as we output a src folder.
-        format: "cjs",
+        dir: path.parse(esmLocation).dir,
+        entryFileNames: `[name]${path.parse(esmLocation).ext}`,
+        format: "esm",
+        exports: "named",
         preserveModules: true,
         sourcemap: true,
       },
       {
-        dir: path.resolve(path.parse(packageJson.module).dir, ".."),
-        format: "esm",
+        dir: path.parse(cjsLocation).dir,
+        entryFileNames: `[name]${path.parse(cjsLocation).ext}`,
+        format: "cjs",
+        exports: "named",
+        interop: "auto",
         preserveModules: true,
         sourcemap: true,
       },
@@ -33,23 +45,22 @@ export default [
       eslint({
         throwOnError: true,
       }),
-      includePaths({
-        include: {},
-        paths: ["src"],
-        external: [],
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+      peerDepsExternal({
+        packageJsonPath: path.resolve(rootDirectory, "package.json"),
       }),
-      peerDepsExternal(),
-      resolve({
+      nodeResolve({
         browser: true,
+        extensions,
       }),
-      commonjs(),
       babel({
         babelHelpers: "bundled",
-        configFile: path.resolve(__dirname, "babel.config.js"),
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        configFile: path.resolve(rootDirectory, "babel.config.js"),
+        extensions,
       }),
-      postcss(),
+      commonjs(),
+      postcss({
+        extract: true,
+      }),
       terser(),
     ],
   },
@@ -57,11 +68,13 @@ export default [
     input: "src/index.ts",
     output: [
       {
-        file: "dist/index.d.ts",
+        dir: path.parse(dtsLocation).dir,
         format: "esm",
+        exports: "named",
+        preserveModules: true,
       },
     ],
     plugins: [dts.default()],
     external: [/\.css$/],
   },
-];
+]);
