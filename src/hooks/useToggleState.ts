@@ -1,10 +1,5 @@
 import { useCallback, useState } from "react";
 
-export const NewState = Object.freeze({
-  open: true,
-  close: false,
-});
-
 /**
  * Hook to toggle an active state.
  */

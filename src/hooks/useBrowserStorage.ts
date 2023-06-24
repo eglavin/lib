@@ -2,19 +2,21 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Hook to save and retrieve state from the browsers local storage.
+ *
+ * Defaults to `localStorage`.
  */
-export const useLocalStorage = <State = unknown>(
+export const useLocalStorage = <T = unknown>(
   storageKey: string,
-  initialValue: State,
+  initialValue: T,
   storageType: "localStorage" | "sessionStorage" = "localStorage"
 ): [
-  value: State,
-  setValue: (value: State | ((value: State) => State)) => void,
+  value: T,
+  setValue: (newValue: T | ((newValue: T) => T)) => void,
   clearValue: () => void
 ] => {
   const storage = useRef(window[storageType]);
 
-  const [storedValue, setStoredValue] = useState<State>(initialValue);
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   useEffect(() => {
     try {
@@ -28,18 +30,17 @@ export const useLocalStorage = <State = unknown>(
     }
   }, [storageKey, initialValue]);
 
-  function setValue(newValue: State | ((value: State) => State)) {
+  function setValue(newValue: T | ((value: T) => T)) {
     try {
-      // Allow value to be a function so we have same API as useState
-      let valueToStore;
+      let _newValue; // Value might be a function.
 
       setStoredValue((prevState) => {
-        valueToStore = newValue instanceof Function ? newValue(prevState) : newValue;
+        _newValue = newValue instanceof Function ? newValue(prevState) : newValue;
 
-        return valueToStore;
+        return _newValue;
       });
 
-      storage.current.setItem(storageKey, JSON.stringify(valueToStore));
+      storage.current.setItem(storageKey, JSON.stringify(_newValue));
     } catch (error) {
       console.log(`Error saving ${storageKey} to local storage`);
     }

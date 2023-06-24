@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 /**
- * Hook with state to cause a useEffect refresh if called.
+ * Stateful hook which can be used to refresh a useEffect if changed.
  */
 export const useRefreshToken = (): [token: number, refresh: () => void] => {
   const [token, setToken] = useState(0);
