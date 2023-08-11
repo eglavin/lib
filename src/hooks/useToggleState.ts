@@ -4,19 +4,19 @@ import { useCallback, useState } from "react";
  * Hook to toggle an active state.
  */
 export const useToggleState = (
-  defaultState = false
+	defaultState = false
 ): [isTrue: boolean, toggleState: (newState?: boolean) => void] => {
-  const [isTrue, setIsTrue] = useState(defaultState);
+	const [isTrue, setIsTrue] = useState(defaultState);
 
-  const toggleState = useCallback((newState?: boolean) => {
-    setIsTrue((prevState) => {
-      if (typeof newState === "boolean") {
-        return newState;
-      }
+	const toggleState = useCallback((newState?: boolean) => {
+		setIsTrue((prevState) => {
+			if (typeof newState === "boolean") {
+				return newState;
+			}
 
-      return !prevState;
-    });
-  }, []);
+			return !prevState;
+		});
+	}, []);
 
-  return [isTrue, toggleState];
+	return [isTrue, toggleState];
 };

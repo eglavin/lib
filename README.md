@@ -2,6 +2,14 @@
 
 Install using your favourite package manager:
 
-```sh
-$ pnpm i @eglavin/lib
-```
+**pnpm**:
+
+`pnpm i @eglavin/lib`
+
+**yarn**:
+
+`yarn add @eglavin/lib`
+
+**npm**:
+
+`npm i @eglavin/lib`

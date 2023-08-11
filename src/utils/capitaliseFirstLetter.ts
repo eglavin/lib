@@ -6,13 +6,13 @@
  * ```
  */
 export function capitaliseFirstLetter(value: string, lowercaseFirst?: boolean): string {
-  let newValue = value;
+	let newValue = value;
 
-  if (lowercaseFirst) {
-    newValue = newValue.toLowerCase();
-  }
+	if (lowercaseFirst) {
+		newValue = newValue.toLowerCase();
+	}
 
-  return newValue.replace(/(\b[a-z](?!\s))/g, function (x) {
-    return x.toUpperCase();
-  });
+	return newValue.replace(/(\b[a-z](?!\s))/g, function (x) {
+		return x.toUpperCase();
+	});
 }

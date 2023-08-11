@@ -1,16 +1,19 @@
+import { expect, describe, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Button } from "./Button";
 
 describe("Button", () => {
-  it("should render the Button component", () => {
-    render(<Button label="Hello world!" />);
-  });
+	it("should render the Button component", () => {
+		const { baseElement } = render(<Button label="Hello world!" />);
 
-  it("should have label content", () => {
-    const TEST_LABEL = "Hello world!";
+		expect(baseElement).toMatchSnapshot();
+	});
 
-    render(<Button label={TEST_LABEL} />);
+	it("should have label content", () => {
+		const TEST_LABEL = "Hello world!";
 
-    expect(screen.getByRole("button", { name: TEST_LABEL })).toBeDefined();
-  });
+		render(<Button label={TEST_LABEL} />);
+
+		expect(screen.getByRole("button", { name: TEST_LABEL })).toBeDefined();
+	});
 });
