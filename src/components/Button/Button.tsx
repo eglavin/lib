@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import "./Button.css";
 
 export type ButtonProps = {
@@ -10,7 +10,7 @@ export type ButtonProps = {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
 	{ label, ...props },
-	ref
+	ref,
 ) {
 	return (
 		<button {...props} ref={ref}>

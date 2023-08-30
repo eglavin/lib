@@ -3,6 +3,7 @@
  * @type {import('prettier').Options}
  */
 module.exports = {
+	endOfLine: "auto",
 	printWidth: 100,
 	useTabs: true,
 };

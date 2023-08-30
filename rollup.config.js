@@ -3,7 +3,7 @@ import path from "path";
 import { babel } from "@rollup/plugin-babel";
 import { defineConfig } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
 import dts from "rollup-plugin-dts";
 import eslint from "@rollup/plugin-eslint";

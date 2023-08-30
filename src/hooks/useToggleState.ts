@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
  * Hook to toggle an active state.
  */
 export const useToggleState = (
-	defaultState = false
+	defaultState = false,
 ): [isTrue: boolean, toggleState: (newState?: boolean) => void] => {
 	const [isTrue, setIsTrue] = useState(defaultState);
 

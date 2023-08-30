@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 export const useLocalStorage = <T = unknown>(
 	storageKey: string,
 	initialValue: T,
-	storageType: "localStorage" | "sessionStorage" = "localStorage"
+	storageType: "localStorage" | "sessionStorage" = "localStorage",
 ): [value: T, setValue: (newValue: T | ((newValue: T) => T)) => void, clearValue: () => void] => {
 	const storage = useRef(window[storageType]);
 
