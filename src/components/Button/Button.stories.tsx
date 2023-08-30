@@ -1,15 +1,16 @@
-import React from "react";
-import { Story } from "@storybook/react";
 import { Button, ButtonProps } from "./Button";
+import type { Meta, StoryObj } from "@storybook/react";
 
-export default {
-	title: "components/Button",
+const meta: Meta<typeof Button> = {
 	component: Button,
 };
 
-const Template: Story<ButtonProps> = (args: Omit<ButtonProps, "ref">) => <Button {...args} />;
+export default meta;
+type Story = StoryObj<typeof Button>;
 
-export const Primary = Template.bind({});
-Primary.args = {
-	label: "Button",
+export const Default: Story = {
+	args: {
+		label: "Button Text",
+	},
+	render: ({ ref, ...props }: ButtonProps) => <Button {...props} />,
 };
