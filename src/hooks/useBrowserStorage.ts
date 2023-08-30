@@ -3,49 +3,53 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Hook to save and retrieve state from the browsers local storage.
  *
- * Defaults to `localStorage`.
+ * @param storage Defaults to "session"
+ * @example
+ * ```ts
+ * const [token, setToken, clearToken] = useBrowserStorage("token", "1234", "local");
+ * ```
  */
-export const useLocalStorage = <T = unknown>(
-	storageKey: string,
+export const useBrowserStorage = <T = unknown>(
+	key: string,
 	initialValue: T,
-	storageType: "localStorage" | "sessionStorage" = "localStorage",
+	storage: "local" | "session" = "session",
 ): [value: T, setValue: (newValue: T | ((newValue: T) => T)) => void, clearValue: () => void] => {
-	const storage = useRef(window[storageType]);
+	const windowRef = useRef(storage === "local" ? window.localStorage : window.sessionStorage);
 
-	const [storedValue, setStoredValue] = useState<T>(initialValue);
+	const [currentValue, setCurrentValue] = useState<T>(initialValue);
 
 	useEffect(() => {
 		try {
-			const item = storage.current.getItem(storageKey);
+			const item = windowRef.current.getItem(key);
 
-			setStoredValue(item ? JSON.parse(item) : initialValue);
+			setCurrentValue(item ? JSON.parse(item) : initialValue);
 		} catch (_) {
-			console.log(`Error getting ${storageKey} from local storage`);
+			console.error(`Error getting ${key}`);
 
-			setStoredValue(initialValue);
+			setCurrentValue(initialValue);
 		}
-	}, [storageKey, initialValue]);
+	}, [key, initialValue]);
 
 	function setValue(newValue: T | ((value: T) => T)) {
 		try {
-			setStoredValue((prevState) => {
-				const _newValue = newValue instanceof Function ? newValue(prevState) : newValue;
+			setCurrentValue((prevValue) => {
+				const _newValue = newValue instanceof Function ? newValue(prevValue) : newValue;
 
-				storage.current.setItem(storageKey, JSON.stringify(_newValue));
+				windowRef.current.setItem(key, JSON.stringify(_newValue));
 				return _newValue;
 			});
 		} catch (error) {
-			console.log(`Error saving ${storageKey} to local storage`);
+			console.error(`Error saving ${key}`);
 		}
 	}
 
 	function clearValue() {
 		try {
-			storage.current.removeItem(storageKey);
+			windowRef.current.removeItem(key);
 		} catch (error) {
-			console.log(`Error removing ${storageKey} from local storage`);
+			console.error(`Error removing ${key}`);
 		}
 	}
 
-	return [storedValue, setValue, clearValue];
+	return [currentValue, setValue, clearValue];
 };
