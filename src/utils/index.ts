@@ -1,1 +1,1 @@
-export * from "./capitaliseFirstLetter";
+export * from "./capitaliseEachWord";
